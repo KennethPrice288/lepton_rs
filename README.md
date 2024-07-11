@@ -12,6 +12,8 @@
 -  Process and analyze thermal data
 -  Easy-to-use API
 
+For example usage, see: ![esp_ir](https://github.com/KennethPrice288/esp_ir)
+
 Documentation
 Full documentation is available on docs.rs.
 Contributing
