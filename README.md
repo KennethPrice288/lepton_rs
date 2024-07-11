@@ -13,35 +13,8 @@
 -  Process and analyze thermal data
 -  Easy-to-use API
 
-## Installation
-
-Add `lepton_rs` to your `Cargo.toml`:
-
-```toml
-[dependencies]
-lepton_rs = "0.1.0"
-Then, run cargo build to download and compile the crate.
-Usage
-Here's a basic example of how to use lepton_rs:
-
-use lepton_rs::LeptonCamera;
-
-fn main() {
-    // Initialize the Lepton camera
-    let mut camera = LeptonCamera::new().expect("Failed to initialize the camera");
-
-    // Capture an image
-    let image = camera.capture().expect("Failed to capture image");
-
-    // Process the image
-    // (Add your image processing code here)
-
-    println!("Image captured successfully!");
-}
 Documentation
 Full documentation is available on docs.rs.
-Examples
-You can find more examples in the examples directory.
 Contributing
 Contributions are welcome! Please see the CONTRIBUTING.md for more details.
 License
