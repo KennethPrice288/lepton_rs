@@ -1,6 +1,5 @@
 # lepton_rs
 
-![Build Status](https://github.com/KennethPrice288/lepton_rs/actions/workflows/ci.yml/badge.svg)
 ![Crates.io](https://img.shields.io/crates/v/lepton_rs)
 ![Docs.rs](https://docs.rs/lepton_rs/badge.svg)
 
