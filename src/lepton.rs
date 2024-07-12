@@ -7,6 +7,7 @@ use crate::lepton_status::LepStatus;
 const PACKETSIZE:usize = 164;
 const FRAMEPACKETS:usize = 60;
 
+/// Camera module
 pub struct Lepton <I2C, SPI, D> {
     cci: LEPTONCCI<I2C, D>,
     spi: SPI,
@@ -20,27 +21,33 @@ impl<I2C, SPI, E1, D> Lepton<I2C, SPI, D>
     D: embedded_hal::delay::DelayNs,
     E1: core::fmt::Debug,
     {
+
         pub fn new(i2c: I2C, spi: SPI, delay: D) -> Result<Self, E1> {
             let cci = LEPTONCCI::new(i2c, delay)?;
             Ok( Lepton { cci, spi, frame: Box::new([0; FRAMEPACKETS * PACKETSIZE]) } )
         }
+
 
         pub fn set_phase_delay(&mut self, phase_delay: i16) -> Result<LepStatus,  LeptonError<E1, SPI::Error>> {
             self.cci.set_phase_delay(phase_delay).map_err(LeptonError::I2c)?;
             self.cci.get_status_code().map_err(LeptonError::I2c)
         }
 
+
         pub fn get_phase_delay(&mut self) -> Result<(i16, LepStatus),  LeptonError<E1, SPI::Error>> {
             self.cci.get_phase_delay().map_err(LeptonError::I2c)
         }
+
 
         pub fn set_gpio_mode(&mut self, gpio_mode: u16) -> Result<LepStatus,  LeptonError<E1, SPI::Error>> {
             self.cci.set_gpio_mode(gpio_mode).map_err(LeptonError::I2c)
         }
 
+
         pub fn get_gpio_mode(&mut self) -> Result<(u16, LepStatus),  LeptonError<E1, SPI::Error>> {
             self.cci.get_gpio_mode().map_err(LeptonError::I2c)
         }
+
 
         pub fn set_video_output_source(&mut self, source: u16) -> Result<LepStatus,  LeptonError<E1, SPI::Error>> {
             self.cci.set_oem_video_output_source(source).map_err(LeptonError::I2c)
@@ -82,6 +89,7 @@ impl<I2C, SPI, E1, D> Lepton<I2C, SPI, D>
             self.cci.set_agc_enable(mode).map_err(LeptonError::I2c)
         }
 
+        ///Returns a u8 vec containing the frame data
         pub fn read_frame(&mut self) -> Result<Vec<u8>,  LeptonError<E1, SPI::Error>> {
 
             let first_packet: [u8; PACKETSIZE];
@@ -111,10 +119,12 @@ impl<I2C, SPI, E1, D> Lepton<I2C, SPI, D>
             return Ok(packet)
         }
 
+        ///Returns a box containing the frame data as an array
         pub fn get_frame(&mut self) -> &Box<[u8; FRAMEPACKETS * PACKETSIZE]> {
             &self.frame
         }
 
+        /// Sets the frame field on the camera struct to data
         pub fn set_frame(&mut self, data: &[u8]) -> Result<(), &'static str> {
             if data.len() != FRAMEPACKETS * PACKETSIZE {
                 return Err("Data length does not match frame buffer size");
