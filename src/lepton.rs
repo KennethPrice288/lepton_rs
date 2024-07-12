@@ -51,7 +51,7 @@ impl<I2C, SPI, E1, D> Lepton<I2C, SPI, D>
         pub fn set_video_output_format(&mut self, format: u16) -> Result<LepStatus, LeptonError<E1, SPI::Error>> {
             self.cci.set_oem_video_output_format(format).map_err(LeptonError::I2c)
         }
-        pub fn get_video_output_format(&mut self, format: u16) -> Result<(u16, LepStatus), LeptonError<E1, SPI::Error>> {
+        pub fn get_video_output_format(&mut self) -> Result<(u16, LepStatus), LeptonError<E1, SPI::Error>> {
             self.cci.get_oem_video_output_format().map_err(LeptonError::I2c)
         }
 
