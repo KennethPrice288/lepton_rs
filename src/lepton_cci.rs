@@ -82,6 +82,12 @@ where
     //OEM
 
     generate_get_set_functions!(
+        set_oem_video_output_format, get_oem_video_output_format, u16,
+        LepCommand::set_oem_video_output_format(),
+        LepCommand::get_oem_video_output_format()
+    );
+
+    generate_get_set_functions!(
         set_oem_video_output_source, get_oem_video_output_source, u16, 
         LepCommand::set_oem_video_output_source(), 
         LepCommand::get_oem_video_output_source()

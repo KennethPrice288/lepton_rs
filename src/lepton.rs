@@ -48,6 +48,10 @@ impl<I2C, SPI, E1, D> Lepton<I2C, SPI, D>
             self.cci.get_gpio_mode().map_err(LeptonError::I2c)
         }
 
+        pub fn set_video_output_format(&mut self, format: u16) -> Result<LepStatus, LeptonError<E1, SPI::Error>> {
+            self.cci.set_oem_video_output_format(format).map_err(LeptonError::I2c)
+        }
+
 
         pub fn set_video_output_source(&mut self, source: u16) -> Result<LepStatus,  LeptonError<E1, SPI::Error>> {
             self.cci.set_oem_video_output_source(source).map_err(LeptonError::I2c)

@@ -85,5 +85,7 @@ impl LepCommand {
     lep_command_fn!(get_oem_video_output_source_constant, Module::OEM, CommandType::Get, 0x3C, 1);
     lep_command_fn!(set_sys_telemetry_mode, Module::SYS, CommandType::Set, 0x18, 1);
     lep_command_fn!(get_sys_telemetry_mode, Module::SYS, CommandType::Get, 0x18, 1);
+    lep_command_fn!(set_oem_video_output_format, Module::OEM, CommandType::Set, 0x28, 1);
+    lep_command_fn!(get_oem_video_output_format, Module::OEM, CommandType::Set, 0x28, 1);
 
 }
